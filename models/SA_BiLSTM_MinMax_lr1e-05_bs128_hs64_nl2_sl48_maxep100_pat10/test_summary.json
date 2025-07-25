@@ -1,0 +1,8 @@
+{
+  "model_tag": "SA_BiLSTM_MinMax_lr1e-05_bs128_hs64_nl2_sl48_maxep100_pat10",
+  "metrics": {
+    "mae": 18.745851516723633,
+    "rmse": 24.013849712766667,
+    "smape": 38.69930648803711
+  }
+}
