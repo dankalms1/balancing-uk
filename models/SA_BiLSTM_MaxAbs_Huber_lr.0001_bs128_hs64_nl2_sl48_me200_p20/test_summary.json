@@ -1,0 +1,91 @@
+{
+  "environment": {
+    "seed_torch": null,
+    "seed_numpy": null,
+    "seed_python": null,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "torch_version": "2.6.0.dev20241112",
+    "python_version": "3.10.18",
+    "run_timestamp": "2025-07-25T21:45:31.420603+00:00"
+  },
+  "data": {
+    "train_end": "2025-03-01",
+    "val_end": "2025-05-01",
+    "seq_len": 48,
+    "n_train": 64273,
+    "n_val": 2929,
+    "n_test": 1439
+  },
+  "features": {
+    "time_feats": [
+      "tod_sin",
+      "tod_cos",
+      "dow_sin",
+      "dow_cos",
+      "moy_sin",
+      "moy_cos"
+    ],
+    "other_feats": [
+      "Imbalance Volume",
+      "Market Price",
+      "Market Volume",
+      "Wind Error",
+      "Solar Error",
+      "Demand Error",
+      "De-Rated Margin (1h)",
+      "Inter Delta",
+      "Non-BM"
+    ],
+    "n_features": 15,
+    "scaler": "MaxAbs",
+    "scaler_params": {
+      "copy": true
+    }
+  },
+  "dataloader": {
+    "batch_size": 128,
+    "shuffle": true,
+    "num_workers": 0,
+    "pin_memory": true,
+    "device": "mps"
+  },
+  "hyperparams": {
+    "model": "SA_BiLSTM",
+    "scaler": "MaxAbs",
+    "loss": "Huber",
+    "beta": 0.01,
+    "learning_rate": 0.0001,
+    "batch_size": 128,
+    "hidden_size": 64,
+    "num_layers": 2,
+    "seq_len": 48
+  },
+  "optimizer": {
+    "type": "Adam",
+    "lr": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "mode": "min",
+    "factor": 0.5,
+    "patience": 5,
+    "min_lr": 1e-07
+  },
+  "early_stop": {
+    "max_epochs": 200,
+    "patience": 20
+  },
+  "metrics": {
+    "mae": 11.05153751373291,
+    "rmse": 14.389139933382431,
+    "smape": 32.68758773803711,
+    "huber": 11.046538352966309
+  }
+}
