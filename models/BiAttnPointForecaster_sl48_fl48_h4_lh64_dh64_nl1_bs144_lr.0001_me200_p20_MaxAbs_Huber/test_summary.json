@@ -1,0 +1,84 @@
+{
+  "environment": {
+    "seed_torch": 42,
+    "seed_numpy": 42,
+    "seed_python": 2147483648,
+    "run_time": "2025-08-01T20:18:05.771636+00:00"
+  },
+  "data": {
+    "start": "2021-07-01",
+    "train_end": "2025-03-01",
+    "val_end": "2025-05-01",
+    "end": "2025-06-30",
+    "seq_len": 48,
+    "feed_len": 48,
+    "horizon": 4,
+    "n_train": 64177,
+    "n_val": 2833,
+    "n_test": 2831
+  },
+  "features": {
+    "hist_feats": [
+      "Imbalance Volume",
+      "Market Price",
+      "Market Volume",
+      "Wind Error",
+      "Solar Error",
+      "Demand Error",
+      "De-Rated Margin (1h)",
+      "Inter Delta",
+      "Non-BM"
+    ],
+    "time_feats": [
+      "month_idx",
+      "weekday_idx",
+      "sp_idx",
+      "dtype_idx"
+    ],
+    "n_fut_feats": 3
+  },
+  "dataloader": {
+    "batch_size": 144,
+    "pin_memory": false,
+    "shuffle": {
+      "train": true,
+      "val": false,
+      "test": false
+    }
+  },
+  "hyperparams": {
+    "model": "BiAttnPointForecaster",
+    "seq_len": 48,
+    "feed_len": 48,
+    "horizon": 4,
+    "lstm_hidden": 64,
+    "dec_hidden": 64,
+    "attn_dim": 48,
+    "num_layers": 1,
+    "batch_size": 144,
+    "learning_rate": 0.0001,
+    "max_epochs": 200,
+    "patience": 20,
+    "scaler": "MaxAbs",
+    "loss": "Huber"
+  },
+  "optimizer": {
+    "type": "Adam",
+    "lr": 5e-05
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "factor": 0.5,
+    "patience": 5
+  },
+  "early_stop": {
+    "max_epochs": 200,
+    "patience": 20
+  },
+  "metrics": {
+    "mae": 27.608823776245117,
+    "rmse": 35.39609146118164,
+    "smape": 59.28083062171936,
+    "huber": 27.603822708129883
+  }
+}
