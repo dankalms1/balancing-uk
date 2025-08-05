@@ -1,0 +1,115 @@
+{
+  "environment": {
+    "seed_torch": 42,
+    "seed_numpy": 42,
+    "seed_python": 2147483648,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "torch_version": "2.6.0.dev20241112",
+    "python_version": "3.10.18",
+    "run_timestamp": "2025-08-02T03:56:57.531069+00:00"
+  },
+  "data": {
+    "start": "2021-07-01",
+    "train_end": "2025-03-01",
+    "val_end": "2025-05-01",
+    "end": "2025-06-30",
+    "n_train": 64225,
+    "n_val": 2881,
+    "n_test": 2879
+  },
+  "features": {
+    "hist_feats": {
+      "cols": [
+        "Imbalance Price",
+        "Imbalance Volume",
+        "Market Price",
+        "Market Volume",
+        "Wind Error",
+        "Solar Error",
+        "Demand Error",
+        "De-Rated Margin (1h)",
+        "Inter Delta",
+        "Non-BM"
+      ],
+      "n": 10
+    },
+    "time_feats": {
+      "cols": [
+        "month_idx",
+        "weekday_idx",
+        "sp_idx",
+        "dtype_idx"
+      ],
+      "n": 15
+    },
+    "fut_feats": {
+      "prefixes": [
+        "demand",
+        "wind",
+        "drm"
+      ],
+      "n": 3,
+      "feed_len": 24,
+      "fut_len": 4
+    },
+    "total_feats": 17
+  },
+  "dataloader": {
+    "batch_size": 96,
+    "shuffle": {
+      "train": true,
+      "val": false,
+      "test": false
+    },
+    "num_workers": 10,
+    "pin_memory": true,
+    "device": "mps"
+  },
+  "hyperparams": {
+    "model": "BiAttnPointForecaster",
+    "seq_len": 24,
+    "feed_len": 24,
+    "horizon": 4,
+    "lstm_hidden": 32,
+    "dec_hidden": 32,
+    "attn_dim": 64,
+    "num_layers": 1,
+    "batch_size": 96,
+    "learning_rate": 0.001,
+    "scaler": "MaxAbs",
+    "loss": "MSE"
+  },
+  "optimizer": {
+    "type": "Adam",
+    "lr": 0.001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "mode": "min",
+    "factor": 0.5,
+    "patience": 5,
+    "min_lr": 1e-07,
+    "last_lr": [
+      0.00025
+    ]
+  },
+  "early_stop": {
+    "max_epochs": 200,
+    "patience": 20,
+    "final_epoch": 25,
+    "best_epoch": 15
+  },
+  "metrics": {
+    "mae": 25.774362564086914,
+    "rmse": 32.00607681274414,
+    "smape": 55.07367253303528,
+    "huber": null
+  }
+}
