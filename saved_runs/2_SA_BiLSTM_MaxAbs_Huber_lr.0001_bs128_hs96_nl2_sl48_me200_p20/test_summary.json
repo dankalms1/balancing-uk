@@ -1,0 +1,99 @@
+{
+  "environment": {
+    "seed_torch": 14766197815865787959,
+    "seed_numpy": 2147483648,
+    "seed_python": 2147483648,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "torch_version": "2.6.0.dev20241112",
+    "python_version": "3.10.18",
+    "run_timestamp": "2025-08-07T21:03:55.595475+00:00"
+  },
+  "data": {
+    "start": "2021-07-01",
+    "train_end": "2025-03-01",
+    "val_end": "2025-05-01",
+    "end": "2025-06-30",
+    "seq_len": 48,
+    "n_train": 64223,
+    "n_val": 2879,
+    "n_test": 2877
+  },
+  "features": {
+    "time_feats": [
+      "tod_sin",
+      "tod_cos",
+      "dow_sin",
+      "dow_cos",
+      "moy_sin",
+      "moy_cos"
+    ],
+    "other_feats": [
+      "Imbalance Price",
+      "Imbalance Volume",
+      "Market Price",
+      "Market Volume",
+      "Actual Wind",
+      "Wind Error",
+      "Actual Solar",
+      "Solar Error",
+      "Actual Demand",
+      "Demand Error",
+      "De-Rated Margin (1h)",
+      "Inter Delta",
+      "Non-BM",
+      "Temperature"
+    ],
+    "n_features": 14,
+    "scaler": "MaxAbs",
+    "scaler_params": {
+      "copy": true
+    }
+  },
+  "dataloader": {
+    "batch_size": 128,
+    "shuffle": true,
+    "num_workers": 0,
+    "pin_memory": true,
+    "device": "mps"
+  },
+  "hyperparams": {
+    "model": "SA_BiLSTM",
+    "horizon": 2,
+    "scaler": "MaxAbs",
+    "loss": "Huber",
+    "beta": 0.01,
+    "learning_rate": 0.0001,
+    "batch_size": 128,
+    "hidden_size": 96,
+    "num_layers": 2,
+    "seq_len": 48
+  },
+  "optimizer": {
+    "type": "Adam",
+    "lr": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "mode": "min",
+    "factor": 0.5,
+    "patience": 5,
+    "min_lr": 1e-07
+  },
+  "early_stop": {
+    "max_epochs": 200,
+    "patience": 20
+  },
+  "metrics": {
+    "mae": 22.692852020263672,
+    "rmse": 30.30434799194336,
+    "smape": 49.296391010284424,
+    "huber": 22.687854766845703
+  }
+}
