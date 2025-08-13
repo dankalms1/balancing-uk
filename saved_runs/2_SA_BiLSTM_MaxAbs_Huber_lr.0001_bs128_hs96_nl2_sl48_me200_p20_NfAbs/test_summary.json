@@ -1,0 +1,100 @@
+{
+  "environment": {
+    "seed_torch": 42,
+    "seed_numpy": 42,
+    "seed_python": 2147483648,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "torch_version": "2.6.0.dev20241112",
+    "python_version": "3.10.18",
+    "run_timestamp": "2025-08-12T22:54:10.486525+00:00"
+  },
+  "data": {
+    "start": "2021-07-01",
+    "train_end": "2025-03-01",
+    "val_end": "2025-05-01",
+    "end": "2025-06-30",
+    "seq_len": 48,
+    "n_train": 64223,
+    "n_val": 2879,
+    "n_test": 2877
+  },
+  "features": {
+    "time_feats": [
+      "tod_sin",
+      "tod_cos",
+      "dow_sin",
+      "dow_cos",
+      "moy_sin",
+      "moy_cos"
+    ],
+    "other_feats": [
+      "Imbalance Price",
+      "Imbalance Volume",
+      "Market Price",
+      "Market Volume",
+      "Actual Wind",
+      "Wind Error",
+      "Actual Solar",
+      "Solar Error",
+      "Actual Demand",
+      "Demand Error",
+      "De-Rated Margin (1h)",
+      "Inter Delta",
+      "Non-BM",
+      "Temperature"
+    ],
+    "boalf_version": "BIDOFFER_NONFLAGGED_ABS.csv",
+    "n_features": 29,
+    "scaler": "MaxAbs",
+    "scaler_params": {
+      "copy": true
+    }
+  },
+  "dataloader": {
+    "batch_size": 128,
+    "shuffle": true,
+    "num_workers": 0,
+    "pin_memory": true,
+    "device": "mps"
+  },
+  "hyperparams": {
+    "model": "SA_BiLSTM",
+    "horizon": 2,
+    "scaler": "MaxAbs",
+    "loss": "Huber",
+    "beta": 0.01,
+    "learning_rate": 0.0001,
+    "batch_size": 128,
+    "hidden_size": 96,
+    "num_layers": 2,
+    "seq_len": 48
+  },
+  "optimizer": {
+    "type": "Adam",
+    "lr": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "mode": "min",
+    "factor": 0.5,
+    "patience": 5,
+    "min_lr": 1e-07
+  },
+  "early_stop": {
+    "max_epochs": 200,
+    "patience": 20
+  },
+  "metrics": {
+    "mae": 32.9342155456543,
+    "rmse": 42.88517761230469,
+    "smape": 65.40301442146301,
+    "huber": 32.92921447753906
+  }
+}

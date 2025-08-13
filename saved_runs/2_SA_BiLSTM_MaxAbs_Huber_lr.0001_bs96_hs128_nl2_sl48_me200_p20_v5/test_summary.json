@@ -44,7 +44,7 @@
       "Non-BM",
       "Temperature"
     ],
-    "n_features": 14,
+    "n_features": 20,
     "scaler": "MaxAbs",
     "scaler_params": {
       "copy": true
